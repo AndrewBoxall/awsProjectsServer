@@ -8,6 +8,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var emailRouter = require('./routes/email');
 var lamodeRouter = require('./routes/lamode');
+var portfolioRouter = require('./routes/portfolio');
 
 var app = express();
 
@@ -17,7 +18,6 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 
-app.use('/wellness-studio', express.static(path.join(__dirname, 'public/wellness-studio/build')));
 app.use('/lamode', express.static(path.join(__dirname, 'public/lamode/build')));
 app.use(express.static(path.join(__dirname, 'public/portfolio/build')));
 
@@ -28,6 +28,7 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/email', emailRouter);
 app.use('/lamode', lamodeRouter);
+app.use('/portfolio', portfolioRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
