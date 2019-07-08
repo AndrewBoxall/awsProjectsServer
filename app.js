@@ -2,11 +2,9 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-
+var config = require('./config/config');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var emailRouter = require('./routes/email');
 var lamodeRouter = require('./routes/lamode');
 var portfolioRouter = require('./routes/portfolio');
 
@@ -25,10 +23,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
-app.use('/email', emailRouter);
-app.use('/lamode', lamodeRouter);
-app.use('/portfolio', portfolioRouter);
+app.use('/lamode', function(req, res, next) {
+  //req.config = {};
+  //req.config.emailpassword = config.portfolio.emailpassword;
+  //req.config.emailusername = config.portfolio.emailusername;
+  next();
+}, lamodeRouter);
+
+app.use('/portfolio', function(req, res, next) {
+  req.config = {};
+  req.config.emailpassword = config.portfolio.emailpassword;
+  req.config.emailusername = config.portfolio.emailusername;
+  next();
+}, portfolioRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
