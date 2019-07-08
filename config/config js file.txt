@@ -1,0 +1,11 @@
+var config = {};
+config.lamode = {};
+config.portfolio = {};
+
+config.portfolio.emailusername = sensitive data;
+config.portfolio.emailpassword = sensitive data;
+
+config.lamode.mongousername = sensitive data;
+config.lamode.mongopassword = sensitive data;
+
+module.exports = config;
