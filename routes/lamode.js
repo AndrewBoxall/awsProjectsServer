@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-
 var Product = require('../mongoSchema/product');
 
+/* GET store products from mongoDB. */
 router.get('/categories/*', function(req, res, next) {
-
   mongoose
     .connect('mongodb+srv://Andrew:zRU9AvitXI6ksbiU@cluster0-gbspm.mongodb.net/lamode?retryWrites=true', { useNewUrlParser: true} )
     .then(() => {
@@ -35,4 +34,9 @@ router.get('/categories/*', function(req, res, next) {
   )
   }
 );
+
+/* GET session token. */
+router.get('/requestSession', (req, res, next) => {
+  res.status(200).send('some token');
+});
 module.exports = router;
