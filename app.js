@@ -24,16 +24,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/lamode', function(req, res, next) {
-  //req.config = {};
-  //req.config.emailpassword = config.portfolio.emailpassword;
-  //req.config.emailusername = config.portfolio.emailusername;
+  req.config = {};
+  req.config.mongousername = config.lamode.mongousername;
+  req.config.mongopassword = config.lamode.mongopassword;
   next();
 }, lamodeRouter);
 
 app.use('/portfolio', function(req, res, next) {
   req.config = {};
-  req.config.emailpassword = config.portfolio.emailpassword;
   req.config.emailusername = config.portfolio.emailusername;
+  req.config.emailpassword = config.portfolio.emailpassword;
   next();
 }, portfolioRouter);
 
@@ -50,7 +50,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.sendFile(path.join(__dirname, '../public/portfolio/build', 'index.html'));
+  //res.render('error');
 });
 
 module.exports = app;
