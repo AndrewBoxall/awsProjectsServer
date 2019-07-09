@@ -6,7 +6,7 @@ var Product = require('../mongoSchema/product');
 /* GET store products from mongoDB. */
 router.get('/categories/*', function(req, res, next) {
   var connectionString;
-  connectionString = `mongodb+srv://${req.config.mongousername}:${req.config.mongopassword}@cluster0-gbspm.mongodb.net/lamode?retryWrites=true`
+  connectionString = `mongodb+srv://${req.config.mongousername}:${req.config.mongopassword}@cluster0-gbspm.mongodb.net/lamode?retryWrites=true`;
   mongoose
     .connect(connectionString, { useNewUrlParser: true} )
     .then(() => {
@@ -41,4 +41,10 @@ router.get('/categories/*', function(req, res, next) {
 router.get('/requestSession', (req, res, next) => {
   res.status(200).send('some token');
 });
+
+/* POST shipping and billing info. */
+router.post('/submitShippingBillingInfo', (req, res, next) => {
+  res.status(200).send('shipping info recieved');
+});
+
 module.exports = router;

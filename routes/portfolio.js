@@ -5,7 +5,7 @@ var nodemailer = require('nodemailer');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log('path1: ' + req.originalUrl);
+  //console.log('path1: ' + req.originalUrl);
   
   res.sendFile(path.join(__dirname, '../public/portfolio/build', 'index.html'));
 });
