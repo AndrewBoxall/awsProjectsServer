@@ -5,8 +5,10 @@ var Product = require('../mongoSchema/product');
 
 /* GET store products from mongoDB. */
 router.get('/categories/*', function(req, res, next) {
+  var connectionString;
+  connectionString = `mongodb+srv://${req.config.mongousername}:${req.config.mongopassword}@cluster0-gbspm.mongodb.net/lamode?retryWrites=true`
   mongoose
-    .connect('mongodb+srv://Andrew:zRU9AvitXI6ksbiU@cluster0-gbspm.mongodb.net/lamode?retryWrites=true', { useNewUrlParser: true} )
+    .connect(connectionString, { useNewUrlParser: true} )
     .then(() => {
 
       var pathArray = req.path.split('/');
