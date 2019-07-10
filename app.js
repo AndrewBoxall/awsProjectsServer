@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var config = require('./config/config');
 var logger = require('morgan');
-
+var compression = require('compression');
 var lamodeRouter = require('./routes/lamode');
 var portfolioRouter = require('./routes/portfolio');
 
@@ -13,7 +13,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
+app.use(compression());
 app.use(logger('dev'));
 
 app.use('/lamode', express.static(path.join(__dirname, 'public/lamode/build')));
